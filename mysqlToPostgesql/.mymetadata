@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="mysqlToPostgesql"
+  id="myeclipse.1377487626292"
+  context-root="/mysqlToPostgesql"
+  j2ee-spec="5.0"
+  archive="mysqlToPostgesql.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
