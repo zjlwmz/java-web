@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.emay.laiqiang.dao.MemberflowlogDao">
+	
+	<select id="findMemberflowlogList" resultType="Memberflowlog" parameterType="hashmap">
+		SELECT * from memberflowlog t where t.memberid=#{memberId} order by createtime desc limit #{start},#{end}
+	</select>
+	
+	
+	
+	<!-- 签到奖励流水 -->
+	<select id="findSignInTodayCount" parameterType="hashmap" resultType="java.lang.Long">
+		select count(*) from memberflowlog t where memberid=#{memberId} and orderid=#{taskId} and type=#{type} and DATE_FORMAT(createtime,'%Y-%m-%d')=#{date}
+	</select>
+	
+	
+	<!-- 分享任务次数 -->
+	<select id="findTaskShareRewardCount" parameterType="hashmap" resultType="java.lang.Long">
+		select count(*) from memberflowlog t where memberid=#{memberId} and orderid=#{taskId} and type=#{type}
+	</select>
+</mapper>

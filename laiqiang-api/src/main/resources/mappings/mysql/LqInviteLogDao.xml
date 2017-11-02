@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.emay.laiqiang.dao.LqInviteLogDao">
+	
+	<insert id="insert" parameterType="LqInviteLog">
+		insert into lq_invite_log(
+								inviter,
+								invitee,
+								inviter_commission,
+								invitee_commission,
+								reward_type,
+								created_time
+						)values(
+							#{inviter},
+							#{invitee},
+							#{inviterCommission},
+							#{inviteeCommission},
+							#{rewardType},
+							#{createdTime}
+						)
+	</insert>
+	
+	<select id="findLqInvitelogList" resultType="LqInviteLog" parameterType="hashmap">
+		SELECT * from lq_invite_log t where t.inviter=#{memberId} limit #{start},#{end}
+	</select>
+	
+</mapper>

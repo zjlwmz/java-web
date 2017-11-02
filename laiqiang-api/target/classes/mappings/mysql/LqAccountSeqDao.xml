@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.emay.laiqiang.dao.LqAccountSeqDao">
+
+	<insert id="insert">
+		insert into lq_account_seq(
+				member_id,
+				direction,
+				transaction_order_id,
+				transaction_type_id,
+				transaction_amount,
+				payment_id,
+				payment_platform_order_id,
+				pre_balance,
+				balance,
+				created_time,
+				remarks,
+				cash_poundage,
+				task_id,
+				activity_id
+		)values(
+			  #{memberId},
+			  #{direction},
+			  #{transactionOrderId},
+			  #{transactionTypeId},
+			  #{transactionAmount},
+			  #{paymentId},
+			  #{paymentPlatformOrderId},
+			  #{preBalance},
+			  #{balance},
+			  #{createdTime},
+			  #{remarks},
+			  #{cashPoundage},
+			  #{taskId},
+			  #{activityId}
+		)
+	</insert>
+	
+	
+	<select id="findTaskRewardCount" parameterType="hashmap" resultType="java.lang.Long">
+		select count(*) from lq_account_seq t where member_id=#{memberId} and task_id=#{taskId} and transaction_type_id=#{type}
+	</select>
+	
+	
+	<!-- 签到奖励流水 -->
+	<select id="findSignInTodayCount" parameterType="hashmap" resultType="java.lang.Long">
+		select count(*) from lq_account_seq t where member_id=#{memberId} and task_id=#{taskId} and transaction_type_id=#{type} and DATE_FORMAT(created_time,'%Y-%m-%d')=#{date}
+	</select>
+	
+	
+	
+	
+	<select id="findLqAccountSeqList" parameterType="hashmap" resultType="LqAccountSeq">
+		select * from lq_account_seq where member_id=#{memberId} order by created_time desc limit #{start},#{end}
+	</select>
+	
+	
+	<select id="getRecommendedTotalCash" parameterType="hashmap" resultType="java.lang.Double">
+		SELECT COALESCE(sum(t.transaction_amount),0.0) from lq_account_seq t where t.transaction_type_id=#{transactionTypeId} and t.member_id=#{memberId}
+	</select>
+</mapper>

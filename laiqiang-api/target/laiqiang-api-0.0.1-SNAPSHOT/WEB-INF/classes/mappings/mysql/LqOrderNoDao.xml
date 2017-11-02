@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.emay.laiqiang.dao.LqOrderNoDao">
+	
+	
+	<insert id="insert" parameterType="LqOrderNoBO">
+		insert into lq_order_no(fdate,serial_number) values(#{fdate},#{serialNumber})
+	</insert>
+	
+	<select id="findLqOrderNoBOByFdate" resultType="LqOrderNoBO">
+		select * from lq_order_no where fdate=#{#fdate} LIMIT 1
+	</select>
+	
+	
+	<update id="updateSerialNumber">
+		 update lq_order_no o set o.serial_number=o.serial_number+1 where o.fdate=#{fdate}
+	</update>
+	
+</mapper>

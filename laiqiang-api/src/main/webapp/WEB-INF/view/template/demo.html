@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  	<script type="text/javascript" src="http://100.100.11.97:8080/laiqiang-api/jquery-1.11.2.min.js"></script>
+  	<script type="text/javascript" src="http://100.100.11.97:8080/laiqiang-api/js.cookie.js"></script>
+  
+  </head>
+  
+  <body>
+  		<input type="text" id="tt"/>
+  		<input type="button" id="dianj" value="点我" onclick="dian()"/>
+  		
+  		<input type="button" id="dianj" value="获取cookie值" onclick="getCookie()"/>
+  		
+  		cookie值：<input type="text" id="cc"/>
+  		
+  		<input type="button" id="dianj" value="wave方法" onclick="wave()"/>
+  		wave值：<input type="text" id="wave"/>
+  		
+  </body>
+  <script type="text/javascript">
+  	function loginResult(a){
+  		var v=$("#tt").val(a);
+  	}
+  	
+  	function wave(){
+  		$("#wave").val("wave");
+  		window.demo.clickOnAndroid();
+  	}
+  	
+  	function dian(){
+  		var tt=$("#tt").val();
+  		if(tt==""){
+  			tt="aaaaa";
+  		}
+  		try{
+  			window.App.appLogin(tt);
+  		}catch(e){
+  			alert(e);
+  		}
+  		
+  	}
+  	
+  	
+  	function getCookie(){
+  		var tt=Cookies.get('tt');
+  		$("#cc").val(tt);
+  	}
+  </script>
+  
+  </html>

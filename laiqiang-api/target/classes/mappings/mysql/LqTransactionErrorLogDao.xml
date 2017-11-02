@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.emay.laiqiang.dao.LqTransactionErrorLogDao">
+	
+	<insert id="insert">
+	
+		insert into lq_transaction_error_log(
+						order_no,
+						flow_order_no,
+						member_id,
+						transaction_type_id,
+						amount,
+						error_message,
+						created_time,
+						`describe`
+						)values(
+						 #{orderNo},
+						 #{flowOrderNo},
+						 #{memberId},
+						 #{transactionTypeId},
+						 #{amount},
+						 #{errorMessage},
+						 #{createdTime},
+						 #{describe}
+				)
+	</insert>
+	
+	
+</mapper>

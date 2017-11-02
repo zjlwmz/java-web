@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.emay.laiqiang.dao.SysDao">
+	
+	<select id="findNoReadMessageCount" parameterType="hashmap" resultType="java.lang.Long">
+		SELECT count(*) from lq_member_message t where t.is_readed=0 and t.member_id=#{memberId}
+	</select>
+	
+	<!-- 已读群消息条数 -->
+	<select id="findReadMessagePushCount" parameterType="hashmap" resultType="java.lang.Long">
+		SELECT count(DISTINCT lp.id) from lq_message_push lp,lq_member_message lm where lp.id=lm.message_push_id and lp.is_deleted=0 and lm.member_id=#{memberId}
+	</select>
+	
+	
+	
+	
+	<!-- 批次奖励导入 -->
+	<select id="rewardExport" resultType="java.lang.Long">
+		select  DISTINCT tt.member_id from (SELECT
+			t.member_id,m.fownum,m.createtime,m.orderid,m.flowbalance
+		FROM
+			lq_install_log t
+		LEFT JOIN memberflowlog m ON t.member_id = m.memberid
+		AND m.orderid = '3'
+		AND m.createtime > '2017-02-28 09:45:00' 
+		WHERE
+			t.install_time > '2017-02-28 09:45:00'
+		AND t.member_id IS NOT NULL) tt  WHERE tt.fownum is null
+	</select>
+	
+	
+	
+	
+	<!-- 查询用户 -->
+	<select id="findAllLqMember"  resultType="java.lang.Long">
+		SELECT t.member_id  from lq_member t
+	</select>
+</mapper>

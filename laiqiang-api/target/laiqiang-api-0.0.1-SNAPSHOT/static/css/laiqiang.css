@@ -1,0 +1,58 @@
+
+/**
+ *
+ * 来抢内嵌网页基本样式
+ *
+ */
+ 
+ #newscontent{
+ 	padding: 7px;
+ }
+ 
+ #comment{
+ 	background: #EFEFEF;
+    padding: 10px;
+    font-size: 12px;
+ }
+ 
+ div.line {
+    height: 50px;
+}
+div.line h1 {
+    margin: 0px;
+    padding: 0px;
+    font-size: 14px;
+    line-height: 50px;
+    color: #C1BBBB;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+}
+
+div.line h1:before,
+div.line h1:after {
+    content: " ";
+    position: relative;
+    display: inline-block;
+    width: 35%;  /* 调节左右中划线的长度*/
+    height: 1px;
+    vertical-align: middle;   /*对象内容的垂直对其方式*/
+    background: #DEDEE4;
+}
+
+div.line h1:before {
+    left: -5px;     /*设置线与文字的距离*/
+    margin: 0 0 0 -50%;
+}
+
+div.line h1:after {
+    left: 5px;
+    margin: 0 -50% 0 0;
+}
+            
+            
+ #comment .row{
+ 	 padding: 10px;
+ } 
+ 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.emay.laiqiang.dao.LqAccountDao">
+	
+	
+	<select id="getLqAccount" resultType="LqAccount">
+		select * from lq_account t where t.member_id=#{memberId}
+	</select>
+	
+	<insert id="insert" parameterType="LqAccount">
+		insert into lq_account(
+			member_id,
+			balance,
+			created_time,
+			updated_time
+		)values(
+			#{memberId},
+			#{balance},
+			#{createdTime},
+			#{updatedTime}
+		)
+	</insert>
+	
+	
+	<update id="update" parameterType="LqAccount">
+		update lq_account set balance=#{balance},updated_time=#{updatedTime} where member_id=#{memberId}
+	</update>
+	
+</mapper>

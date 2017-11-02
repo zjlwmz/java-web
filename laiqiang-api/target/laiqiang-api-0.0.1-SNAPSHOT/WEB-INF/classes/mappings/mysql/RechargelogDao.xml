@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.emay.laiqiang.dao.RechargelogDao">
+	
+	
+	<select id="findRechargelogList" resultType="Rechargelog" parameterType="hashmap">
+		 select t.mdn as phone,t.operator,t.`status`,t.time as createtime ,t.money/100 as money,t.userflow as package_type,t.rstatus from rechargelog t   where memberid=#{memberid} order by time desc limit #{start},#{end}
+	</select>
+	
+	
+	<select id="findRechargelogTotalMoney" resultType="java.lang.Long">
+		SELECT COALESCE(SUM(t.money),0) from rechargelog t where t.memberid=#{memberid} and t.status=2
+	</select>
+	
+	
+	<select id="findWxrechargeList" resultType="Rechargelog" parameterType="hashmap">
+		 SELECT t.phone,t.rechargepackage as package_type,t.money/100 as money,t.`status`,t.area as operator,t.createtime,t.rstatus from wxrecharge t  where memberid=#{memberid} order by createtime desc limit #{start},#{end}
+	</select>
+	
+	<select id="findWxrechargeTotalMoney" resultType="java.lang.Long">
+		SELECT COALESCE(SUM(t.money),0) from rechargelog t where t.memberid=#{memberid} and t.status=1
+	</select>
+	
+	
+</mapper>

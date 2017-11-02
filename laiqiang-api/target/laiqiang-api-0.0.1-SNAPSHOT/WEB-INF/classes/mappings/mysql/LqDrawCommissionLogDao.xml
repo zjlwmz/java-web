@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.emay.laiqiang.dao.LqDrawCommissionLogDao">
+	
+	<insert id="insert" parameterType="LqDrawCommissionLog">
+		insert into lq_draw_commission_log(
+			task_id,
+			transaction_type_id,
+			inviter,
+			invitee,
+			draw_commission,
+			memberflowlog_id,
+			account_seq_id,
+			reward_type,
+			created_time
+		)vales(
+			#{taskId},
+			#{transactionTypeId},
+			#{inviter},
+			#{invitee},
+			#{drawCommission},
+			#{memberflowlogId},
+			#{accountSeqId},
+			#{rewardType},
+			#{createdTime}
+		)
+		
+	</insert>
+	
+	
+	
+	
+	<select id="findLqDrawCommissionLogList" parameterType="hashmap" resultType="LqDrawCommissionLog">
+		select * from lq_draw_commission_log where inviter=#{memberId} limit #{start},#{end}
+	</select>
+	
+	
+	
+	<select id="getGrossIncome" resultType="java.lang.Double" parameterType="hashmap">
+		select COALESCE(SUM(draw_commission),0) from lq_draw_commission_log where inviter=#{memberId} and reward_type=#{rewardType}
+	</select>
+	
+	
+</mapper>

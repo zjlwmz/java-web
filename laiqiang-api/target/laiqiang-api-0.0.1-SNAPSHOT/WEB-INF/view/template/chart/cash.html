@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  	<meta charset="UTF-8">
+  	<title>现金流水</title>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">    
+    <style type="text/css">
+		html,body,* {
+			font-family: "Microsoft YaHei" ! important;
+			font-size: 12px;
+		}
+
+	    table{
+	    	width: 100%;
+	    	color:#212020;
+	    	font-size: 15px;
+	    	text-align: center;
+	    }
+	    
+	    .row{
+	    	border-top: 1px solid #E2DDDD;
+	    	height: 50px;
+	    }
+	    .row.bootom{
+	    	border-bottom: 1px solid #E2DDDD;
+	    }
+	    .row div{
+	    	width: 48%;
+	    	float: left;
+    		text-align: center;
+    		height: 50px;
+    		line-height: 50px;
+	    }
+	    .row div.left{
+	    	border-right: 1px solid #E2DDDD;
+	    }
+		#log {
+			margin-top: 25px;
+		}
+		
+		#log table tr {
+			border-top: 1px solid #E2DDDD;
+		}
+		
+		#log table td {
+			height: 50px;
+			line-height: 50px;
+		}
+		
+		#log table td.left {
+			border-right: 1px solid #E2DDDD;
+		}
+		
+		#log table tr:last-child {
+			border-bottom: 1px solid #E2DDDD;
+		}
+</style>
+</head>
+
+<body>
+	 <table>
+		<tr>
+			<td>${todayCash}元</td>
+			<td>${cashRise}</td>
+		</tr>
+		<tr>
+			<td>今日收益</td>
+			<td>比昨日上升</td>
+		</tr>
+	</table>
+	<div style="text-align:center;clear:both;"></div>
+	<div style="height: 200px;box-shadow: 3px 3px 3px #ccc" id="chart-container"></div>
+	<div><div style="float: left;">${beforeDay}</div><div style="float: right;">${today}</div></div>
+	<div style="text-align:center;clear:both;"></div>
+	<div id="log">
+		<div class="row">
+			<div class="left">截图任务收益 ${totalcash101}元</div>
+			<div class="right">推荐收益 ${totalcash102}元</div>
+		</div>
+		<div class="row">
+			<div class="left">返利收益 ${totalcash103}元</div>
+			<div class="right">下载任务收益 ${totalcash104}元</div>
+			
+		</div>
+		<div class="row bootom">
+			<div class="left">签到收益 ${totalcash105}元</div>
+			<div class="right">分享任务收益 ${totalcash109}元</div>
+		</div>
+	</div>
+</body>
+
+	<script type="text/javascript">
+		var chart_1_y =${days7Cash};
+		var maxCash=${maxCash};
+	</script>
+	
+	<script src="${_project}static/js/lib/libraries/RGraph.svg.common.core.js" ></script>
+    <script src="${_project}static/js/lib/libraries/RGraph.svg.line.js" ></script>
+	<script>
+			new RGraph.SVG.Line({
+	            id: 'chart-container',
+	            data:chart_1_y,
+	            options: {
+	                backgroundGridVlinesCount: 11,
+	                hmargin: 0,
+	                textColor: 'white',
+					textColor: 'black',
+	                textSize: 14,
+	                textFont: 'Verdana',
+	                filled: true,
+					filledColors: ['rgba(245,138,138,0.75)'],
+	                //filledColors: ['rgba(25,51,74,0.75)'],
+					colors:['#EC0F4D'],
+	                //colors: ['#5AF'],
+	                gutterLeft: 10,
+	                gutterRight: 10,
+	                gutterBottom: 15,
+	                gutterTop: 20,
+	                xaxis: false,
+	                yaxis: false,
+	                //yaxisUnitsPost: '$',
+	                //yaxisUnitsPre: '$',
+	                tickmarksStyle: 'circle',
+	                //tickmarksFill: 'black',
+					tickmarksFill: 'white',
+					//tickmarksFill: 'white',
+	                tickmarksLinewidth: 2,
+	                tickmarksSize: 3,
+	                linewidth: 2,
+	                spline: true,
+	                yaxisLabels:false
+	                //xaxisLabels: ['Kev','John','Fred','July','Fred','Olga','Ben','Boris','Lenny','Pete','Lewis']
+	            }
+	        }).trace();
+        
+    </script>
+</html>

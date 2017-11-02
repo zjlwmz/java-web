@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.emay.laiqiang.dao.LqMemberDao">
+	<select id="getByMemberId" resultType="LqMemberBO">
+		SELECT 
+			* 
+		FROM lq_member 
+		WHERE member_id = #{memberId}
+	</select>
+	
+	
+	<select id="getByUuid" resultType="LqMemberBO">
+		SELECT 
+			* 
+		FROM lq_member 
+		WHERE uuid = #{uuid}
+	</select>
+	
+	
+	<select id="getByUnionid" resultType="LqMemberBO">
+		SELECT 
+			* 
+		FROM lq_member 
+		WHERE unionid = #{unionid} limit 1
+	</select>
+	
+	
+	<insert id="insert">
+		insert into lq_member(
+						member_id,
+						uuid,
+						push_id,
+						invitation_code,
+						unionid,
+						created_time
+						)values(
+						 #{memberId},
+						 #{uuid},
+						 #{pushId},
+						 #{invitationCode},
+						 #{unionid},
+						 #{createdTime}
+				)
+	</insert>
+	
+	
+	
+	<select id="getinvitedFriends" resultType="java.lang.Long" parameterType="java.lang.Long">
+		select count(*) from lq_member where inviter=#{inviter}
+	</select>
+	
+	
+	<update id="updatePassword" parameterType="LqMemberBO">
+		update lq_member set pay_password=#{payPassword},pay_salt=#{paySalt} where member_id=#{memberId}
+	</update>
+	
+	<update id="updateInviter" parameterType="LqMemberBO">
+		update lq_member set inviter=#{inviter} where member_id=#{memberId}
+	</update>
+	
+	<select id="findInvitationNumber" parameterType="hashmap"  resultType="java.lang.Long">
+		select count(*) from lq_member t WHERE t.inviter=#{inviter}
+	</select>
+	
+	
+	<update id="updateInvitationNumber" parameterType="LqMemberBO">
+		update lq_member set invitation_number=#{invitationNumber} where member_id=#{memberId}
+	</update>
+	
+	
+	<select id="getByInvitationCode" resultType="LqMemberBO">
+		select * from lq_member where invitation_code=#{invitationCode} limit 1
+	</select>
+	
+	
+	
+	
+	<update id="updatePushId" parameterType="LqMemberBO">
+		update lq_member set push_id=#{pushId} where member_id=#{memberId}
+	</update>
+</mapper>

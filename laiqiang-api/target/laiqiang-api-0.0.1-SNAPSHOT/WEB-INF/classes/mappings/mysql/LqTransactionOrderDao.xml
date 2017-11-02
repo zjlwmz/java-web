@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.emay.laiqiang.dao.LqTransactionOrderDao">
+	
+	<insert id="insert">
+		insert into lq_transaction_order(
+				transaction_type_id,
+				order_no,
+				amount,
+				member_id,
+				created_time,
+				status,
+				reward_type,
+				phone_number,
+				package_type,
+				cardcode_id
+			)values(
+				#{transactionTypeId},
+				#{orderNo},
+				#{amount},
+				#{memberId},
+				#{createdTime},
+				#{status},
+				#{rewardType},
+				#{phoneNumber},
+				#{packageType},
+				#{cardcodeId}
+			)
+	</insert>
+	
+	<select id="findLqTransactionOrderByNo" resultType="LqTransactionOrder">
+		SELECT * from lq_transaction_order t where t.order_no=#{orderNo} LIMIT 1
+	</select>
+
+	
+	
+	<update id="update" parameterType="LqTransactionOrder">
+		update lq_transaction_order set 
+		status=#{status},
+		finish_on=#{finishOn},
+		query_last_on=#{queryLastOn},
+		query_times=#{queryTimes},
+		payment_id=#{paymentId},
+		thirdparty_order_id=#{thirdpartyOrderId},
+		interface_return_status=#{interfaceReturnStatus},
+		flow_order_no=#{flowOrderNo}
+		where order_no=#{orderNo}
+	</update>
+	
+	
+	<select id="findRechargelogList" resultType="Rechargelog" parameterType="hashmap">
+	 	select t.phone_number as phone,
+	 	t.created_time as createtime ,
+	 	t.amount as money,
+	 	t.package_type,
+	 	#{orderStatus} as status
+		from lq_transaction_order t  
+	 	 where member_id=#{memberid} and status=#{status} and transaction_type_id = #{transactionTypeId} and  interface_return_status=#{interfaceReturnStatus} order by created_time desc  limit #{start},#{end}
+	</select>
+	
+	
+</mapper>
